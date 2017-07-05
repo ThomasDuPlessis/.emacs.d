@@ -815,7 +815,19 @@
                              (org-agenda-files :maxlevel . 9)))
 
   (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
-  ;; (setq org-columns-default-format "%50ITEM(Task) %3PRIORITY %TAGS %10CLOCKSUM %16TIMESTAMP_IA")
+  ;; (setq org-columns-default-format "%50ITEM(Task) %3PRIORITY %TAGS
+  ;; %10CLOCKSUM %16TIMESTAMP_IA")
+  
+  (defun org-columns-entire-file ()
+    "turn on org-columns for the entire file."
+    (interactive)
+    (save-excursion
+      (goto-char (point-min))
+      (if (looking-at "[[:space:]]*$")
+          (org-columns)
+        (progn
+          (open-line 1)
+          (org-columns)))))
 
   (setq org-clock-mode-line-total 'current)
 
