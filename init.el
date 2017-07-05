@@ -63,7 +63,7 @@
 (use-package yasnippet
   :ensure t
   :bind (:map yas-minor-mode-map
-         ("C-M-y" . yas-expand))
+              ("C-M-y" . yas-expand))
   :config (progn
             (yas-global-mode 1)
             (add-hook 'prog-mode-hook #'yas-minor-mode)
@@ -187,6 +187,18 @@
                    ("Help" (or (name . "\*Help\*")
                                (name . "\*Apropos\*")
                                (name . "\*info\*"))))))
+  (setq ibuffer-formats 
+      '((mark modified read-only " "
+              (name 30 30 :left :elide) ; change: 30s were originally 18s
+              " "
+              (size 9 -1 :right)
+              " "
+              (mode 16 16 :left :elide)
+              " " filename-and-process)
+        (mark " "
+              (name 16 -1)
+              " " filename)))
+
   (defun my-ibuffer-hook ()
     (ibuffer-auto-mode 1)
     (ibuffer-switch-to-saved-filter-groups "default"))
@@ -434,7 +446,8 @@
               (load-theme 'doom-one t))))
 
 (use-package go-mode
-  :ensure t)
+  :ensure t
+  :bind (:map go-mode-map ("M-." . godef-jump)))
 
 ;; extra lisp code should be in lisp directory of .emacs.d
 (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -527,7 +540,7 @@
   (tool-bar-mode -1))
 
 (tool-bar-mode -1)
-;; (set-frame-font "Ubuntu Mono-14" nil t)
+;; (set-frame-font "Inconsolata-16" nil t)
 
 ;; use spaces instead of tabs
 (setq indent-tabs-mode nil)
@@ -600,10 +613,7 @@
 ;; always add closing brackets and parens
 (electric-pair-mode 1) 
 
-(setq default-frame-alist '((width . 100) (height . 50)
-                            (font . "Ubuntu Mono-14")
-                            ;; (menu-bar-lines . 1)
-                            ))
+(setq default-frame-alist '((font . "Inconsolata-16")))
 
 (setq initial-frame-alist default-frame-alist)
 

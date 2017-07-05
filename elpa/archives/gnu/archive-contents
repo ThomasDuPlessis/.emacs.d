@@ -402,7 +402,11 @@
 	  ((:url . "https://github.com/leoliu/ggtags")
 	   (:keywords "tools" "convenience"))])
  (gited .
+<<<<<<< HEAD
 	[(0 3)
+=======
+	[(0 2 5)
+>>>>>>> 7c4a3973d9963d7f8640d0148da9fc85dcf06a33
 	 ((emacs
 	   (24 4))
 	  (cl-lib
