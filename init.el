@@ -370,6 +370,12 @@ Other errors while reverting a buffer are reported only as messages."
         (with-current-buffer buf
           (with-demoted-errors "Error: %S" (revert-buffer t t)))))))
 
+(defun find-user-init-file ()
+  "Edit the `user-init-file', in another window."
+  (interactive)
+  (find-file user-init-file))
+(global-set-key (kbd "C-c i") #'find-user-init-file)
+
 ;; print out loading time.
 (when window-system
   (let ((elapsed (float-time (time-subtract (current-time)
