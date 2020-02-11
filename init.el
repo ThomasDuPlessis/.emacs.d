@@ -64,6 +64,7 @@ There are two things you can do about this warning:
 (setq default-frame-alist '((font . "Roboto Mono-16")))
 
 (use-package xresources-theme
+  :ensure t
   :config (load-theme 'xresources))
 
 ;; (use-package company
@@ -349,10 +350,6 @@ There are two things you can do about this warning:
   (add-hook 'org-mode-hook (lambda()
                              (turn-on-flyspell)
                              (abbrev-mode))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;; Dired Extensions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package dired
   :init (progn
           (setq dired-listing-switches "-alh")
@@ -360,8 +357,18 @@ There are two things you can do about this warning:
   :bind (:map dired-mode-map
               ("C-x w" . wdired-change-to-wdired-mode)))
 
-(if (file-exists-p "~/extras.el")
-    (load-file "~/extras.el"))
+(defun revert-all-no-confirm ()
+  "Revert all file buffers, without confirmation.
+Buffers visiting files that no longer exist are ignored.
+Files that are not readable (including do not exist) are ignored.
+Other errors while reverting a buffer are reported only as messages."
+  (interactive)
+  (let (file)
+    (dolist (buf  (buffer-list))
+      (setq file  (buffer-file-name buf))
+      (when (and file  (file-readable-p file))
+        (with-current-buffer buf
+          (with-demoted-errors "Error: %S" (revert-buffer t t)))))))
 
 ;; print out loading time.
 (when window-system
