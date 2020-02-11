@@ -45,7 +45,9 @@ tramp
 
 elpa/*
 elpa/archives/*
-
+elpa/archives/gnu/*
+elpa/archives/melpa/*
+elpa/gnupg/*
 .org-id-locations
 ido.last
 newsticker/
@@ -61,3 +63,5 @@ network-security.data
 
 
 flycheck_init.el
+
+transient/*
