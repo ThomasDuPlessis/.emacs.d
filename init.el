@@ -175,12 +175,9 @@
 (global-hl-line-mode +1)         ; highlight current line
 (setq frame-title-format "emacs - %b")   ; always dispay filename as titlebar
 
-(toggle-scroll-bar 1)
+(toggle-scroll-bar -1)
 (size-indication-mode)
-(unless (display-graphic-p)
-  (menu-bar-mode -1)
-  (tool-bar-mode -1))
-
+(menu-bar-mode -1)
 (tool-bar-mode -1)
 
 ;; column length
