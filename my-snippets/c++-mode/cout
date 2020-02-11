@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: cout
-# key: c
-# group: c++11
-# --
-${1:std::}cout <<$0

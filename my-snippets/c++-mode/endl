@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: endl
-# key: e
-# group: c++11
-# --
-${1:std::}endl;
-$0

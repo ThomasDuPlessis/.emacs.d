@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: size_t
-# key: si
-# group: c++11
-# --
-size_t $0
