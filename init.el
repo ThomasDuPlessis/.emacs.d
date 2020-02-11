@@ -286,8 +286,8 @@
     (subword-mode))
   (add-hook 'org-mode-hook 'my-org-hook)
   (setq org-startup-with-inline-images t)
-
-  (setq org-agenda-files '("~/org/"))
+  (setq org-directory "~/org/")
+  (setq org-agenda-files (list org-directory))
 
   (setq org-completion-use-ido t)
   (setq org-agenda-window-setup 'current-window)
@@ -298,28 +298,27 @@
                 (sequence "PHONE" "MEETING" "|" "CANCELLED(c)"))))
 
   (setq org-todo-keyword-faces
-        (quote (("TODO"           :weight bold)
-                ("NEXT"        :weight bold)
-                ("WAITING"    :weight bold)
-                ("HOLD"         :weight bold)
-                ("CANCELLED"   :weight bold)
-                ("MEETING"      :weight bold)
-                ("PHONE"        :weight bold)
-                ("DONE"          :weight bold))))
+        (quote (("TODO"     :weight bold)
+                ("NEXT"     :weight bold)
+                ("WAITING"  :weight bold)
+                ("HOLD"     :weight bold)
+                ("CANCELLED":weight bold)
+                ("MEETING"  :weight bold)
+                ("PHONE"    :weight bold)
+                ("DONE"     :weight bold))))
 
   ;; highlight the cyrrent time in org agenda.
   (set-face-attribute 'org-agenda-current-time nil :foreground "purple")
 
- (setq org-use-fast-todo-selection t)
+  (setq org-use-fast-todo-selection t)
   (setq org-capture-templates
-        '(("t" "Todo" entry (file+headline "~/org/todo.org" "General")
+        '(("t" "Todo" entry (file+headline (concat org-directory "notes.org") "General")
            "* TODO %?\n  %i\n")
-          ("r" "Read" entry (file+headline "~/org/todo.org" "Read")
-           "* TODO %?\n:PROPERTIES:\n:Author:\n:Platform: Book\n:Bookmark:\n:END:")
-          ("j" "Journal" entry (file+datetree "~/org/journal.org")
+	  ("pt" "personal todo" entry (file+headline (concat org-directory "personal.org") "General")
+           "* TODO %?\n  %i\n")
+	  ("j" "Journal" entry (file+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")
-          ("a" "Appointment" entry (file  "~/org/agenda.org")
-           "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")))
+          ))
 
   (setq org-refile-use-outline-path t)
   (setq org-outline-path-complete-in-steps t)
@@ -328,20 +327,7 @@
                              (org-agenda-files :maxlevel . 9)))
 
   (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
-  ;; (setq org-columns-default-format "%50ITEM(Task) %3PRIORITY %TAGS
-  ;; %10CLOCKSUM %16TIMESTAMP_IA")
   
-  (defun org-columns-entire-file ()
-    "turn on org-columns for the entire file."
-    (interactive)
-    (save-excursion
-      (goto-char (point-min))
-      (if (looking-at "[[:space:]]*$")
-          (org-columns)
-        (progn
-          (open-line 1)
-          (org-columns)))))
-
   (setq org-clock-mode-line-total 'current)
 
   (define-key org-mode-map (kbd "M-p") 'flyspell-goto-previous-error)
